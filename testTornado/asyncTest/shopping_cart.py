@@ -2,6 +2,7 @@ import tornado.web
 import tornado.httpserver
 import tornado.ioloop
 import tornado.options
+import tornado.websocket
 
 from uuid import uuid4
 
@@ -13,11 +14,14 @@ class ShoppingCart(object):
 	def register(self, callback):
 		self.callbacks.append(callback)
 
+	def unregister(self, callback):
+		self.callbacks.remove(callback)
+
 	def moveItemToCart(self, session):
 		if session in self.carts:
 			return
 
-		self.cart[session] = True
+		self.carts[session] = True
 		self.notifyCallbacks()
 
 	def removeItemFromCart(self, session):
@@ -31,9 +35,7 @@ class ShoppingCart(object):
 		for c in self.callbacks:
 			self.callbackHelper(c)
 
-		self.callbacks = []
-
-	def callbackHelper(self):
+	def callbackHelper(self, callback):
 		callback(self.getInventoryCount())
 
 	def getInventoryCount(self):
@@ -57,18 +59,22 @@ class CartHandler(tornado.web.RequestHandler):
 		if action == 'add':
 			self.application.shoppingCart.moveItemToCart(session)
 		elif action == 'remove':
-			self.application.shoppingCart.removeItemToCart(session)
+			self.application.shoppingCart.removeItemFromCart(session)
 		else:
 			self.set_status(400)
 
-class StatusHandler(tornado.web.RequestHandler):
-	@tornado.web.asynchronous
-	def get(self):
-		self.application.shoppingCart.register(self.async_callback(self.on_message))
+class StatusHandler(tornado.websocket.WebSocketHandler):
+	def open(self):
+		self.application.shoppingCart.register(self.callback)
 
-	def on_message(self, count):
-		self.write('{"inventoryCount":"%d"}' % count)
-		self.finish()
+	def on_close(self):
+		self.application.shoppingCart.unregister(self.callback)
+
+	def on_message(self, message):
+		pass
+
+	def callback(self, count):
+		self.write_message('{"inventoryCount" : "%d"}' % count)
 
 class Application(tornado.web.Application):
 	def __init__(self):
