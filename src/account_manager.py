@@ -73,7 +73,8 @@ def __test_all():
     print (account_manager.get_account_info_by_email(zhengwei0828_gmail))
 
     print ("----- test [delete account] zhengwei0828@gmail.com in database -----")
-    account_manager.delete_account_by_email(zhengwei0828_gmail)
+    #account_manager.delete_account_by_email(zhengwei0828_gmail)
+    #account_manager.delete_account_by_email(zhengwei0828_gmail)
 
     print ("----- test [account] zhengwei0828@gmail.com is existing in database -----")
     print (account_manager.get_account_info_by_email(zhengwei0828_gmail))

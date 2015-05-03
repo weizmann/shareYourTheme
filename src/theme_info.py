@@ -13,12 +13,12 @@ class ThemeInfo(BaseModel):
 
     # foreign key and backref variable
     provider_account_id = Column(BIGINT(unsigned=True), ForeignKey('account_info.account_id'))
-    provider_account = relationship('AccountInfo', backref('theme_info', order_by=theme_id))
+    provider_account = relationship('AccountInfo', backref=backref('theme_info', order_by=theme_id))
 
     theme_tag = Column(VARCHAR(128))
-    upload_time = Column(DATETIME, index=True)
+    upload_time = Column(DATETIME)
     download_count = Column(BIGINT(unsigned=True))
-    last_download_time = Column(DATETIME, index=True)
+    last_download_time = Column(DATETIME)
 
 
     def __init__(self, provider_account_id, theme_tag, upload_time, download_count, last_download_time):
