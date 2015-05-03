@@ -1,0 +1,24 @@
+__author__ = 'weizheng'
+
+ERROR_CODE_KEY  = 'ERROR_CODE'
+
+
+ERROR_CODE_REGISTER_ACCOUNT_EXIST   = 4100
+ERROR_CODE_ACCOUNT_NOT_EXIST        = 4101
+ERROR_CODE_RESET_PWD_EXPIRE         = 4102
+ERROR_CODE_RESET_PWD_INVALID        = 4103
+ERROR_CODE_RESET_PWD_FAILED         = 4104
+ERROR_CODE_SEND_MAIL_FAILED         = 4105
+
+ERROR_CODE_LOGIN_TOKEN_ERROR        = 5001
+ERROR_CODE_LOGIN_NAME_NOT_EXIST     = 5002
+ERROR_CODE_LOGIN_PWD_INVALID        = 5003
+
+ERROR_CODE_OK                       = 200
+
+STRING_TO_BOOL            = {'true': True, 'false': False}
+
+DATABASE_USER_NAME      = 'wei.zheng'
+DATABASE_PASSWORD       = 'zhengwei'
+DATABASE_HOST_NAME      = 'localhost'
+DATABASE_DB_NAME        = 'share_your_theme'

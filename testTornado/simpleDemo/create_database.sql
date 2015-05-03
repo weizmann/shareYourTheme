@@ -4,6 +4,7 @@ use share_theme;
 create table share_theme_account (
 		account_id 		varchar(128),
 		email 			varchar(128),
+		password		varchar(128),
 		auth_token		varchar(128),
 		gender			tinyint(4),
 		register_time	bigint(20),
