@@ -22,7 +22,7 @@ class ThemeManager(object):
     def get_upload_themes_by_account(self, account_id):
         pass
 
-    def get_theme_account_provider(self, theme_info):
+    def get_theme_provider_account(self, theme_info):
         pass
 
     def record_theme(self, theme_info):

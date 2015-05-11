@@ -7,6 +7,9 @@ from consts import *
 from response_message import ReponseMessage
 
 class AccountRegisterHandler(tornado.web.RequestHandler):
+    def __init__(self):
+        self.account_manager = None
+
     def initialize(self, database_engine):
         self.account_manager = AccountManager(database_engine)
 

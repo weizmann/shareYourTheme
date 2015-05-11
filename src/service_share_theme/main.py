@@ -3,7 +3,9 @@ import tornado.web
 
 from account_register_handler import AccountRegisterHandler
 from account_login_handler import AccountLoginHandler
-from theme_upload_handler import  UploadThemeHandler
+from account_logout_handler import AccountLogoutHandler
+
+from theme_upload_handler import  ThemeUploadHandler
 from query_share_companion_handler import QueryShakeCompanionHandler
 from theme_download_handler import DownloadThemeHandler
 
@@ -23,6 +25,8 @@ database_engine = get_database_engine()
 application = tornado.web.Application([
 	(r"/register", AccountRegisterHandler, dict(database_engine=database_engine)),
     (r"/login", AccountLoginHandler, dict(database_engine=database_engine)),
+    (r'/logout', AccountLogoutHandler, dict(database_engine=database_engine)),
+
 	#(r"/upload/", UploadThemeHandler),
 	#(r"/queryShakeCompanion/", QueryShakeCompanionHandler),
 	#(r"/downloadTheme/", DownloadThemeHandler),

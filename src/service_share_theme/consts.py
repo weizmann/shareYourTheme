@@ -22,3 +22,6 @@ DATABASE_USER_NAME      = 'wei.zheng'
 DATABASE_PASSWORD       = 'zhengwei'
 DATABASE_HOST_NAME      = 'localhost'
 DATABASE_DB_NAME        = 'share_your_theme'
+
+STORAGE_CONTENT_TYPE_ACCOUNT_INFO   = 0
+STORAGE_CONTENT_TYPE_THEME_INFO     = 1
