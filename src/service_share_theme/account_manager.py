@@ -13,19 +13,19 @@ class AccountManager(object):
         self.session = sessionmaker(bind=engine, autocommit=True)()
 
     def get_account_info_by_email(self, email):
-        return self.session.query(AccountInfo).filter_by(email = AccountInfo.email).all()
+        return self.session.query(AccountInfo).filter_by(email = AccountInfo.email).first()
 
     def is_account_exist(self, account_id):
-        query = self.session.query(AccountInfo).filter_by(account_id = AccountInfo.account_id)
-        return self.session.query(query.exists()).all()
+        query = self.session.query(AccountInfo).filter_by(AccountInfo.account_id == account_id)
+        return len(query.all()) != 0
 
     def is_email_registered(self, email):
-        query = self.session.query(AccountInfo).filter_by(email = AccountInfo.email)
-        return self.session.query(query.exists()).all()
+        query = self.session.query(AccountInfo).filter(AccountInfo.email == email)
+        return len(query.all()) != 0
 
     def is_password_valid(self, email, password):
         account_info = self.get_account_info_by_email(email)
-        return (account_info) and (account_info.password == password)
+        return (account_info is not None) and (account_info.password == password)
 
     def add_account(self, account_info):
         if self.get_account_info_by_email(email=account_info.email):

@@ -22,6 +22,8 @@ class AccountRegisterHandler(tornado.web.RequestHandler):
         password = self.get_argument("password")
 
         response_msg = ReponseMessage()
+        print("email = " + email)
+        print("auth_token = " + auth_token)
         if self.account_manager.is_email_registered(email):
             response_msg.set_error_code(ERROR_CODE_REGISTER_ACCOUNT_EXIST)
         else:

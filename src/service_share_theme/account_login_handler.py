@@ -28,5 +28,5 @@ class AccountLoginHandler(tornado.web.RequestHandler):
             account_info.last_login_time = datetime.now()
             self.account_manager.update_record()
 
-        self.write(response_msg)
+        self.write(repr(response_msg))
 

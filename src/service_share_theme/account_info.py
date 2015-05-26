@@ -15,6 +15,10 @@ class AccountInfo(BaseModel):
     register_time = Column(DATETIME, index=True)
     last_login_time = Column(DATETIME, index=True)
 
+    def __str__(self):
+        return "<AccountInfo email = %s, password = %s, auth_token = %s, register_time = %s>" \
+            %(self.email, self.password, self.auth_token, self.register_time)
+
     def __init__(self, email = None, password = None, gender = None, auth_token = None, register_time = None):
         self.email = email
         self.password = password
