@@ -5,6 +5,7 @@ import tornado.web
 from theme_manager import ThemeManager
 from account_manager import AccountManager
 from response_message import ReponseMessage
+import os
 
 REQUEST_ARGUMENT_ACCOUNT_ID     = "account_id"
 REQUEST_ARGUMENT_AUTH_TOKEN     = "auth_token"
@@ -26,5 +27,14 @@ class ThemeUploadHandler(tornado.web.RequestHandler):
         account_id = self.get_argument(REQUEST_ARGUMENT_ACCOUNT_ID)
         auth_token = self.get_argument(REQUEST_ARGUMENT_AUTH_TOKEN)
 
-
+        file_metas = self.request.files["theme_content"]
+        upload_path = "./"
+        for meta in file_metas:
+            file_name = meta['file_name']
+            file_path = os.path.join(upload_path, file_name)
+            with open(file_path, 'wb') as up:
+                up.write(meta['body'])
+                up.write(meta['body'])
+        #self.theme_manager.record_theme()
         response_msg = ReponseMessage()
+        self.write(response_msg)
